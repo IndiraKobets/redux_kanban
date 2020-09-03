@@ -27,6 +27,18 @@ const kanbanControlPanel = (state = initialState, action) => {
         case 'ADD_TASK':
             return {...state, list: [...state.list, {id: uuidv4(), title: action.payload, priority: 2, status: 'todo'}]};
 
+        case 'TASK_UPDATE':
+            return {
+                ...state,
+                list: state.list.map(el => {
+                    if (el.id === action.payload) {
+                        return {...el, title: action.payload}
+                    }
+                    return el
+                })
+            };
+
+
         default:               //default same as else
             return state;
     }
